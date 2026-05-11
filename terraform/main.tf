@@ -4,7 +4,7 @@ terraform {
     # via -backend-config flags in the GitHub Actions workflow.
     # endpoint injected via endpoints block to avoid the deprecated "endpoint" param.
     endpoints = {
-      s3 = "https://us-east-1.digitaloceanspaces.com"
+      s3 = "https://nyc3.digitaloceanspaces.com"
     }
     skip_credentials_validation = true
     skip_metadata_api_check     = true
@@ -33,7 +33,7 @@ variable "project_name" {
 }
 variable "do_region" {
   type    = string
-  default = "us-east-1"
+  default = "nyc3"
 }
 variable "public_key" {
   type = string
@@ -41,6 +41,19 @@ variable "public_key" {
 variable "droplet_size" {
   type    = string
   default = "s-1vcpu-1gb"
+}
+variable "db_name" {
+  type    = string
+  default = ""
+}
+variable "db_username" {
+  type    = string
+  default = "appuser"
+}
+variable "db_password" {
+  type      = string
+  sensitive = true
+  default   = ""
 }
 
 resource "digitalocean_ssh_key" "deploy" {
